@@ -9382,7 +9382,7 @@ function ProductCard({
       "img",
       {
         css: imageCss,
-        src: imageError ? "/assets/fallback_image.png" : imageUrl,
+        src: imageError ? "assets/fallback_image.png" : imageUrl,
         alt: `${title}상품`,
         onLoad: () => setIsLoaded(true),
         onError: () => setImageError(true)
