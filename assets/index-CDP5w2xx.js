@@ -9210,10 +9210,10 @@ const Spinner = ({ size = "medium" }) => {
     "div",
     {
       css: [
-        baseSpinnerStyle,
         size === "small" && smallStyle,
         size === "medium" && mediumStyle,
-        size === "large" && largeStyle
+        size === "large" && largeStyle,
+        baseSpinnerStyle
       ]
     }
   ) });
@@ -9374,14 +9374,18 @@ function ProductCard({
   productId,
   cartItemId
 }) {
+  const [imageError, setImageError] = reactExports.useState(false);
+  const [isLoaded, setIsLoaded] = reactExports.useState(false);
   return /* @__PURE__ */ jsxs("li", { css: cardCss, children: [
+    !isLoaded && /* @__PURE__ */ jsx$1(Spinner, { size: "large" }),
     /* @__PURE__ */ jsx$1(
       "img",
       {
         css: imageCss,
-        src: imageUrl,
+        src: imageUrl === null || imageError ? "/assets/fallback_image.png" : imageUrl,
         alt: `${title}상품`,
-        onLoad: () => console.log("로드 되었슈!")
+        onLoad: () => setIsLoaded(true),
+        onError: () => setImageError(true)
       }
     ),
     /* @__PURE__ */ jsxs("div", { css: detailCss, children: [
