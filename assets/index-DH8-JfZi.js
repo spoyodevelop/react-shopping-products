@@ -9376,23 +9376,13 @@ function ProductCard({
 }) {
   const [imageError, setImageError] = reactExports.useState(false);
   const [isLoaded, setIsLoaded] = reactExports.useState(false);
-  const basePath = reactExports.useMemo(() => {
-    const isGitHubPages = window.location.hostname.includes("github.io");
-    return isGitHubPages ? "/react-shopping-products" : "";
-  }, []);
-  const isValidImageUrl = (url) => {
-    if (!url)
-      return false;
-    return url.startsWith("http://") || url.startsWith("https://");
-  };
-  const fallbackImagePath = `${basePath}/assets/fallback_image.png`;
   return /* @__PURE__ */ jsxs("li", { css: cardCss, children: [
     !isLoaded && /* @__PURE__ */ jsx$1(Spinner, { size: "large" }),
     /* @__PURE__ */ jsx$1(
       "img",
       {
         css: imageCss,
-        src: !isValidImageUrl(imageUrl) || imageError ? fallbackImagePath : imageUrl,
+        src: imageError ? "assets/fallback_image.png" : imageUrl,
         alt: `${title}상품`,
         onLoad: () => setIsLoaded(true),
         onError: () => setImageError(true)
